@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Section from './components/Section/Section';
 import FeedbackOptions from './components/FeedbackOptions';
 import Statistics from './components/Statistics/Statistics';
@@ -8,7 +8,7 @@ function App() {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
-  const [total, setTotal] = useState(0);
+
   const addFeedback = type => {
     if (type === 'good') {
       setGood(e => e + 1);
@@ -20,14 +20,11 @@ function App() {
       setBad(e => e + 1);
     }
   };
-  useEffect(() => {
-    setTotal(good + neutral + bad);
-  }, [good, neutral, bad]);
 
   const countPositiveFeedbackPercentage = () => {
     return total > 0 ? Math.round((good / total) * 100) : 0;
   };
-
+  const total = good + neutral + bad;
   return (
     <div>
       <Section title="Please leave feedback">
